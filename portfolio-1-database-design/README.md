@@ -9,7 +9,7 @@
 | `01_schema.sql` | Creates the `relaks` schema: 16 tables, 1 view, all keys and constraints |
 | `02_sample_data.sql` | Loads a small simulated dataset (fictional customers, real Relaks product range and prices) |
 | `03_constraint_tests.sql` | 11 deliberately invalid statements that prove the constraints reject bad data |
-| `er-diagram.mmd` / `er-diagram.png` | ER diagram (Mermaid source and rendered image) |
+| `er-diagram.mmd` | ER diagram source (Mermaid). GitHub renders it below |
 | `screenshots/` | Evidence of the scripts running on my machine |
 
 ## How to run
@@ -32,7 +32,147 @@ psql -U postgres -d relaks -f 03_constraint_tests.sql
 | Outside Lagos | `distributor` | Customers in Kano, Abuja, Port Harcourt and Ibadan buy through a city distributor at the wholesale price. It's a reference table that isn't linked to orders, because distributor sales happen outside the website. |
 | Reading Club | `rental_plan`, `rental_book`, `rental_subscription`, `rental_loan` | Monthly plan (2 books, ₦8,000 + ₦6,000 delivery) and Quarterly plan (5 books, ₦22,500 + ₦6,000). Every book handed to a subscriber is a loan. |
 
-![ER diagram](er-diagram.png)
+### ER diagram
+
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ADDRESS : "saves"
+    DELIVERY_ZONE ||--o{ ADDRESS : "covers"
+    CUSTOMER ||--o{ CUSTOMER_ORDER : "places"
+    ADDRESS ||--o{ CUSTOMER_ORDER : "ships to"
+    PROMOTION |o--o{ CUSTOMER_ORDER : "applied to"
+    CUSTOMER_ORDER ||--|{ ORDER_ITEM : "contains"
+    PRODUCT ||--o{ ORDER_ITEM : "sold as"
+    PRODUCT_CATEGORY ||--o{ PRODUCT : "groups"
+    PRODUCT ||--o{ COMBO_ITEM : "is combo"
+    PRODUCT ||--o{ COMBO_ITEM : "is component"
+    CUSTOMER_ORDER ||--o{ PAYMENT : "paid by"
+    CUSTOMER_ORDER ||--o| DELIVERY : "fulfilled by"
+    CUSTOMER ||--o{ RENTAL_SUBSCRIPTION : "subscribes"
+    RENTAL_PLAN ||--o{ RENTAL_SUBSCRIPTION : "defines"
+    RENTAL_SUBSCRIPTION ||--o{ RENTAL_LOAN : "includes"
+    RENTAL_BOOK ||--o{ RENTAL_LOAN : "lent in"
+
+    CUSTOMER {
+        int customer_id PK
+        varchar full_name
+        varchar email UK
+        varchar phone
+        varchar country
+        varchar id_verification_status
+        timestamptz created_at
+    }
+    ADDRESS {
+        int address_id PK
+        int customer_id FK
+        varchar label
+        varchar street
+        int zone_id FK
+        boolean is_default
+    }
+    DELIVERY_ZONE {
+        int zone_id PK
+        varchar zone_name UK
+        varchar city
+        numeric delivery_fee
+    }
+    DISTRIBUTOR {
+        int distributor_id PK
+        varchar city UK
+        varchar contact_name
+        varchar phone
+        numeric wholesale_price
+    }
+    PRODUCT_CATEGORY {
+        int category_id PK
+        varchar category_name UK
+    }
+    PRODUCT {
+        int product_id PK
+        varchar sku UK
+        varchar product_name
+        int category_id FK
+        numeric unit_price
+        int stock_qty
+    }
+    COMBO_ITEM {
+        int combo_product_id PK,FK
+        int component_product_id PK,FK
+        int quantity
+    }
+    PROMOTION {
+        int promo_id PK
+        varchar promo_code UK
+        numeric discount_percent
+        boolean free_delivery
+        timestamptz starts_at
+        timestamptz ends_at
+    }
+    CUSTOMER_ORDER {
+        int order_id PK
+        int customer_id FK
+        int address_id FK
+        int promo_id FK
+        varchar sales_channel
+        varchar order_status
+        numeric delivery_fee
+        timestamptz ordered_at
+    }
+    ORDER_ITEM {
+        int order_id PK,FK
+        int product_id PK,FK
+        int quantity
+        numeric unit_price_at_purchase
+    }
+    PAYMENT {
+        int payment_id PK
+        int order_id FK
+        varchar paystack_reference UK
+        numeric amount
+        varchar payment_status
+        timestamptz paid_at
+    }
+    DELIVERY {
+        int delivery_id PK
+        int order_id FK,UK
+        varchar rider_name
+        varchar delivery_status
+        timestamptz dispatched_at
+        timestamptz delivered_at
+    }
+    RENTAL_PLAN {
+        int plan_id PK
+        varchar plan_name UK
+        int books_allowed
+        numeric price
+        numeric delivery_fee
+        int duration_days
+    }
+    RENTAL_BOOK {
+        int rental_book_id PK
+        varchar title
+        varchar author
+        varchar genre
+        int copies_total
+    }
+    RENTAL_SUBSCRIPTION {
+        int subscription_id PK
+        int customer_id FK
+        int plan_id FK
+        date start_date
+        date end_date
+        varchar sub_status
+        boolean auto_renew
+    }
+    RENTAL_LOAN {
+        int loan_id PK
+        int subscription_id FK
+        int rental_book_id FK
+        date delivered_on
+        date due_on
+        date returned_on
+    }
+```
 
 ## 2. Relationships and cardinality
 
@@ -113,8 +253,16 @@ The result is the schema in `01_schema.sql`. Every non-key attribute depends on 
 
 ## 5. Evidence
 
-Screenshots in `screenshots/`:
+All three were run on my own laptop (PostgreSQL 17, pgAdmin 4) on 10 November 2026.
 
-1. `01-schema-created.png`: tables listed in pgAdmin / `\dt relaks.*`
-2. `02-sample-data.png`: `SELECT * FROM relaks.order_summary;`
-3. `03-constraint-tests.png`: the 11 rejected statements
+**1. Schema created:** all 16 tables in the `relaks` database, with their row counts after loading the sample data.
+
+![All 16 tables created](screenshots/01-schema-created.png)
+
+**2. Sample data and derived totals:** `SELECT * FROM relaks.order_summary;` Each order total is calculated as items subtotal + delivery fee, and matches its Paystack payment amount where one exists.
+
+![Order summary view](screenshots/02-sample-data.png)
+
+**3. Constraint tests:** all 11 invalid operations are rejected, with PostgreSQL's own error message for each one.
+
+![11 of 11 constraint tests passed](screenshots/03-constraint-tests.png)

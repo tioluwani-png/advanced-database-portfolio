@@ -40,5 +40,5 @@ PostgreSQL 16+, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER 
 - I ran every script myself on PostgreSQL 17 on my own laptop. The screenshots in each portfolio folder come from those runs.
 - I checked the results against what should happen. All 11 constraint tests are rejected, stock and customer counts are unchanged afterwards, and each order total in `order_summary` matches its Paystack payment amount.
 - I checked the business rules against how Relaks actually operates (product range, prices, combos, delivery fees, rental plans) and corrected them where needed.
-- I read through each design decision until I could explain it in my own words. The design choices, trade-offs and lessons are written up in my individual reflection.
+
 - All customer data is simulated. No real Relaks customer data was given to the AI tool or stored in this repository.

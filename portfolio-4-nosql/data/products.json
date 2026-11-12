@@ -1,0 +1,126 @@
+[
+ {
+  "_id": "BOOK-PINK",
+  "name": "Relaks Coloring Book — Pink Edition",
+  "category": "coloring_book",
+  "price": 10000,
+  "stock_qty": 120,
+  "is_active": true,
+  "attributes": {
+   "edition": "Pink",
+   "pages": 50,
+   "paper": "120gsm, single-sided"
+  }
+ },
+ {
+  "_id": "BOOK-TEAL",
+  "name": "Relaks Coloring Book — Teal Edition",
+  "category": "coloring_book",
+  "price": 10000,
+  "stock_qty": 95,
+  "is_active": true,
+  "attributes": {
+   "edition": "Teal",
+   "pages": 50,
+   "paper": "120gsm, single-sided"
+  }
+ },
+ {
+  "_id": "BOOK-LAV",
+  "name": "Relaks Coloring Book — Lavender Edition",
+  "category": "coloring_book",
+  "price": 10000,
+  "stock_qty": 3,
+  "is_active": true,
+  "attributes": {
+   "edition": "Lavender",
+   "pages": 50,
+   "paper": "120gsm, single-sided"
+  }
+ },
+ {
+  "_id": "PENCIL-24",
+  "name": "24 Colored Pencils",
+  "category": "stationery",
+  "price": 4000,
+  "stock_qty": 200,
+  "is_active": true,
+  "attributes": {
+   "count": 24,
+   "type": "colored pencil"
+  }
+ },
+ {
+  "_id": "FELT-24",
+  "name": "24 Felt Pens",
+  "category": "stationery",
+  "price": 5000,
+  "stock_qty": 150,
+  "is_active": true,
+  "attributes": {
+   "count": 24,
+   "type": "felt-tip pen",
+   "washable": true
+  }
+ },
+ {
+  "_id": "TOTE-RLX",
+  "name": "Relaks Tote Bag",
+  "category": "bag",
+  "price": 8000,
+  "stock_qty": 60,
+  "is_active": true,
+  "attributes": {
+   "material": "canvas",
+   "colour": "cream"
+  }
+ },
+ {
+  "_id": "COMBO-25K",
+  "name": "₦25k Combo (1 book + tote bag + pencils)",
+  "category": "combo",
+  "price": 25000,
+  "stock_qty": 40,
+  "is_active": true,
+  "components": [
+   {
+    "sku": "BOOK-PINK",
+    "qty": 1
+   },
+   {
+    "sku": "TOTE-RLX",
+    "qty": 1
+   },
+   {
+    "sku": "PENCIL-24",
+    "qty": 1
+   }
+  ]
+ },
+ {
+  "_id": "COMBO-32K",
+  "name": "₦32k Combo (2 books + pencils + felt pens)",
+  "category": "combo",
+  "price": 32000,
+  "stock_qty": 40,
+  "is_active": true,
+  "components": [
+   {
+    "sku": "BOOK-PINK",
+    "qty": 1
+   },
+   {
+    "sku": "BOOK-TEAL",
+    "qty": 1
+   },
+   {
+    "sku": "PENCIL-24",
+    "qty": 1
+   },
+   {
+    "sku": "FELT-24",
+    "qty": 1
+   }
+  ]
+ }
+]

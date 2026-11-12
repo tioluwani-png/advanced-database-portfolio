@@ -19,10 +19,10 @@ All customer records in this repository are **simulated**. Product names, prices
 | # | Folder | Status |
 |---|---|---|
 | 1 | [`portfolio-1-database-design/`](portfolio-1-database-design/) | Done: ER diagram, schema, constraints, normalisation |
-| 2 | [`portfolio-2-query-optimisation/`](portfolio-2-query-optimisation/) | Not started |
-| 3 | [`portfolio-3-transactions-concurrency/`](portfolio-3-transactions-concurrency/) | Not started |
-| 4 | [`portfolio-4-nosql/`](portfolio-4-nosql/) | Not started |
-| 5 | [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) | Not started |
+| 2 | [`portfolio-2-query-optimisation/`](portfolio-2-query-optimisation/) | Done: 300,000 simulated orders, execution plans before/after indexing, timing benchmark |
+| 3 | [`portfolio-3-transactions-concurrency/`](portfolio-3-transactions-concurrency/) | Done: COMMIT/ROLLBACK/SAVEPOINT, lost update and `SELECT … FOR UPDATE`, isolation levels, deadlock |
+| 4 | [`portfolio-4-nosql/`](portfolio-4-nosql/) | Done: MongoDB Atlas document model, validation, aggregation, indexes, suitability |
+| 5 | [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) | In progress |
 
 ## Tools
 

@@ -35,9 +35,7 @@ PostgreSQL 16+, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER 
 **What I used it for:**
 - Talking through which case study to use. I chose Relaks, my own business, because I know its real processes: multi-channel orders, Lagos delivery zones, Paystack payments, Black Friday promos and the Reading Club rentals.
 - Drafting the SQL scripts (schema, sample data, constraint tests), the Mermaid ER diagram source and the first drafts of the README documentation, based on the Relaks details I gave it.
-- Explaining concepts I was less sure of, such as partial unique indexes, why a price is copied into `order_item`, and how to show 2NF and 3NF step by step.
-- Setting up the repository structure and helping me install and configure PostgreSQL on my laptop.
-
+- Explaining concepts I was less sure of, such as partial unique indexes, why a price is copied into `order_item`, and how to show 2NF and 3NF step by step..
 **How I reviewed, tested and verified the output:**
 - I ran every script myself on PostgreSQL 17 on my own laptop. The screenshots in each portfolio folder come from those runs.
 - I checked the results against what should happen. All 11 constraint tests are rejected, stock and customer counts are unchanged afterwards, and each order total in `order_summary` matches its Paystack payment amount.

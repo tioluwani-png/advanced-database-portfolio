@@ -36,7 +36,6 @@ PostgreSQL 16+, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER 
 
 **What I used Claude for:**
 - Explaining concepts that were new to me: normal forms, execution plans, isolation levels, locks, replication and shard keys.
-- Drafting the SQL and MongoDB scripts, the simulated-data generators, the diagrams, and first drafts of the READMEs and the summary document, from the Relaks details I gave it.
-- Guiding me step by step through setting up PostgreSQL, Atlas and GitHub and running the scripts.
+- Guiding me through setting up PostgreSQL and Atlas 
 
-**How I verified the output:** Every script was run against my own databases. I checked results against the expected outcomes: all 11 constraint tests rejected, order totals matching Paystack amounts, the lost update reproduced and then fixed, 19 documents examined after indexing, and orders split 25% per shard. I read every design decision until I could explain it in my own words. All customer data is simulated; no real Relaks data was given to the AI or stored in this repository.
+**How I verified the output:** Every script was run against my own databases. I checked results against the expected outcomes: all 11 constraint tests rejected, order totals matching Paystack amounts, the lost update reproduced and then fixed, 19 documents examined after indexing, and orders split 25% per shard. All customer data is simulated; no real Relaks data was given to the AI or stored in this repository.

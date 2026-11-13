@@ -22,7 +22,7 @@ All customer records in this repository are **simulated**. Product names, prices
 | 2 | [`portfolio-2-query-optimisation/`](portfolio-2-query-optimisation/) | Done: 300,000 simulated orders, execution plans before/after indexing, timing benchmark |
 | 3 | [`portfolio-3-transactions-concurrency/`](portfolio-3-transactions-concurrency/) | Done: COMMIT/ROLLBACK/SAVEPOINT, lost update and `SELECT … FOR UPDATE`, isolation levels, deadlock |
 | 4 | [`portfolio-4-nosql/`](portfolio-4-nosql/) | Done: MongoDB Atlas document model, validation, aggregation, indexes, suitability |
-| 5 | [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) | In progress |
+| 5 | [`portfolio-5-distributed-cloud/`](portfolio-5-distributed-cloud/) | Done: Atlas replica set, shard-key analysis, sharding simulation on 300,000 orders, consistency choices, cloud deployment |
 
 ## Tools
 

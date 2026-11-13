@@ -30,15 +30,13 @@ PostgreSQL 16+, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER 
 
 ## AI use declaration
 
-**Tool used:** Claude (Anthropic), used as a coding and tutoring assistant throughout this portfolio.
+**Tool used:** Claude (Anthropic), used as a tutor and coding assistant between 10 and 14 November 2026.
 
-**What I used it for:**
-- Talking through which case study to use. I chose Relaks, my own business, because I know its real processes: multi-channel orders, Lagos delivery zones, Paystack payments, Black Friday promos and the Reading Club rentals.
-- Drafting the SQL scripts (schema, sample data, constraint tests), the Mermaid ER diagram source and the first drafts of the README documentation, based on the Relaks details I gave it.
-- Explaining concepts I was less sure of, such as partial unique indexes, why a price is copied into `order_item`, and how to show 2NF and 3NF step by step..
-**How I reviewed, tested and verified the output:**
-- I ran every script myself on PostgreSQL 17 on my own laptop. The screenshots in each portfolio folder come from those runs.
-- I checked the results against what should happen. All 11 constraint tests are rejected, stock and customer counts are unchanged afterwards, and each order total in `order_summary` matches its Paystack payment amount.
-- I checked the business rules against how Relaks actually operates (product range, prices, combos, delivery fees, rental plans) and corrected them where needed.
+**My own work:** I chose Relaks, my own business, as the case study and supplied its real business rules: products, prices, combos, delivery zones, Paystack payments and Reading Club plans. I signed up for MongoDB Atlas, ran the work on my own PostgreSQL 17 installation and Atlas cluster, and took every screenshot. I checked each result and corrected the design wherever it didn't match how Relaks actually operates. When a session froze in Portfolio 3, I worked out why and recorded it as a lesson. The reflection is my own.
 
-- All customer data is simulated. No real Relaks customer data was given to the AI tool or stored in this repository.
+**What I used Claude for:**
+- Explaining concepts that were new to me: normal forms, execution plans, isolation levels, locks, replication and shard keys.
+- Drafting the SQL and MongoDB scripts, the simulated-data generators, the diagrams, and first drafts of the READMEs and the summary document, from the Relaks details I gave it.
+- Guiding me step by step through setting up PostgreSQL, Atlas and GitHub and running the scripts.
+
+**How I verified the output:** Every script was run against my own databases. I checked results against the expected outcomes: all 11 constraint tests rejected, order totals matching Paystack amounts, the lost update reproduced and then fixed, 19 documents examined after indexing, and orders split 25% per shard. I read every design decision until I could explain it in my own words. All customer data is simulated; no real Relaks data was given to the AI or stored in this repository.

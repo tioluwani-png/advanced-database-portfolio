@@ -26,7 +26,7 @@ All customer records in this repository are **simulated**. Product names, prices
 
 ## Tools
 
-PostgreSQL 16+, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER diagram), Git and GitHub.
+PostgreSQL 17, psql / pgAdmin 4, MongoDB Atlas (Portfolios 4–5), Mermaid (ER diagram), Git and GitHub.
 
 ## AI use declaration
 

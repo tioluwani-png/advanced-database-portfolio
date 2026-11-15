@@ -1,0 +1,44 @@
+[
+ {
+  "_id": 1,
+  "title": "Things Fall Apart",
+  "author": "Chinua Achebe",
+  "genre": "Fiction",
+  "copies_total": 4
+ },
+ {
+  "_id": 2,
+  "title": "Purple Hibiscus",
+  "author": "Chimamanda Ngozi Adichie",
+  "genre": "Fiction",
+  "copies_total": 3
+ },
+ {
+  "_id": 3,
+  "title": "Atomic Habits",
+  "author": "James Clear",
+  "genre": "Self-help",
+  "copies_total": 5
+ },
+ {
+  "_id": 4,
+  "title": "The Psychology of Money",
+  "author": "Morgan Housel",
+  "genre": "Finance",
+  "copies_total": 3
+ },
+ {
+  "_id": 5,
+  "title": "Stay With Me",
+  "author": "Ayobami Adebayo",
+  "genre": "Fiction",
+  "copies_total": 2
+ },
+ {
+  "_id": 6,
+  "title": "Born a Crime",
+  "author": "Trevor Noah",
+  "genre": "Memoir",
+  "copies_total": 2
+ }
+]

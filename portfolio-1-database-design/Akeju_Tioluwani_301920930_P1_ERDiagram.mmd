@@ -1,0 +1,137 @@
+erDiagram
+    CUSTOMER ||--o{ ADDRESS : "saves"
+    DELIVERY_ZONE ||--o{ ADDRESS : "covers"
+    CUSTOMER ||--o{ CUSTOMER_ORDER : "places"
+    ADDRESS ||--o{ CUSTOMER_ORDER : "ships to"
+    PROMOTION |o--o{ CUSTOMER_ORDER : "applied to"
+    CUSTOMER_ORDER ||--|{ ORDER_ITEM : "contains"
+    PRODUCT ||--o{ ORDER_ITEM : "sold as"
+    PRODUCT_CATEGORY ||--o{ PRODUCT : "groups"
+    PRODUCT ||--o{ COMBO_ITEM : "is combo"
+    PRODUCT ||--o{ COMBO_ITEM : "is component"
+    CUSTOMER_ORDER ||--o{ PAYMENT : "paid by"
+    CUSTOMER_ORDER ||--o| DELIVERY : "fulfilled by"
+    CUSTOMER ||--o{ RENTAL_SUBSCRIPTION : "subscribes"
+    RENTAL_PLAN ||--o{ RENTAL_SUBSCRIPTION : "defines"
+    RENTAL_SUBSCRIPTION ||--o{ RENTAL_LOAN : "includes"
+    RENTAL_BOOK ||--o{ RENTAL_LOAN : "lent in"
+
+    CUSTOMER {
+        int customer_id PK
+        varchar full_name
+        varchar email UK
+        varchar phone
+        varchar country
+        varchar id_verification_status
+        timestamptz created_at
+    }
+    ADDRESS {
+        int address_id PK
+        int customer_id FK
+        varchar label
+        varchar street
+        int zone_id FK
+        boolean is_default
+    }
+    DELIVERY_ZONE {
+        int zone_id PK
+        varchar zone_name UK
+        varchar city
+        numeric delivery_fee
+    }
+    DISTRIBUTOR {
+        int distributor_id PK
+        varchar city UK
+        varchar contact_name
+        varchar phone
+        numeric wholesale_price
+    }
+    PRODUCT_CATEGORY {
+        int category_id PK
+        varchar category_name UK
+    }
+    PRODUCT {
+        int product_id PK
+        varchar sku UK
+        varchar product_name
+        int category_id FK
+        numeric unit_price
+        int stock_qty
+    }
+    COMBO_ITEM {
+        int combo_product_id PK,FK
+        int component_product_id PK,FK
+        int quantity
+    }
+    PROMOTION {
+        int promo_id PK
+        varchar promo_code UK
+        numeric discount_percent
+        boolean free_delivery
+        timestamptz starts_at
+        timestamptz ends_at
+    }
+    CUSTOMER_ORDER {
+        int order_id PK
+        int customer_id FK
+        int address_id FK
+        int promo_id FK
+        varchar sales_channel
+        varchar order_status
+        numeric delivery_fee
+        timestamptz ordered_at
+    }
+    ORDER_ITEM {
+        int order_id PK,FK
+        int product_id PK,FK
+        int quantity
+        numeric unit_price_at_purchase
+    }
+    PAYMENT {
+        int payment_id PK
+        int order_id FK
+        varchar paystack_reference UK
+        numeric amount
+        varchar payment_status
+        timestamptz paid_at
+    }
+    DELIVERY {
+        int delivery_id PK
+        int order_id FK,UK
+        varchar rider_name
+        varchar delivery_status
+        timestamptz dispatched_at
+        timestamptz delivered_at
+    }
+    RENTAL_PLAN {
+        int plan_id PK
+        varchar plan_name UK
+        int books_allowed
+        numeric price
+        numeric delivery_fee
+        int duration_days
+    }
+    RENTAL_BOOK {
+        int rental_book_id PK
+        varchar title
+        varchar author
+        varchar genre
+        int copies_total
+    }
+    RENTAL_SUBSCRIPTION {
+        int subscription_id PK
+        int customer_id FK
+        int plan_id FK
+        date start_date
+        date end_date
+        varchar sub_status
+        boolean auto_renew
+    }
+    RENTAL_LOAN {
+        int loan_id PK
+        int subscription_id FK
+        int rental_book_id FK
+        date delivered_on
+        date due_on
+        date returned_on
+    }
